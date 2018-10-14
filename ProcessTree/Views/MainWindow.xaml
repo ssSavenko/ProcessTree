@@ -42,9 +42,9 @@
                 <ColumnDefinition Width="75"/>
             </Grid.ColumnDefinitions>
             <TextBox Margin = "5" Grid.Column="0"/>
-            <Button  Margin = "5" Grid.Column="1" Content="Start"/>
-            <Button  Margin = "5" Grid.Column="2" Content="Stop"/>
-            <Button  Margin = "5" Grid.Column="3" Content="Refresh"/>
+            <Button  Margin = "5" Grid.Column="1" Content="Start"   Command="{Binding StartPrpcess}"/>
+            <Button  Margin = "5" Grid.Column="2" Content="Stop"    Command="{Binding StopProcess}"/>
+            <Button  Margin = "5" Grid.Column="3" Content="Refresh" Command="{Binding RefreshData}"/>
         </Grid>
     </Grid>
 </Window>

@@ -13,6 +13,9 @@ namespace ProcessTree.Models
         private const string DllName = @"..\..\..\Debug\NativeLibrary.dll";
 
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int ParentProcessId(Process process);
+        public static extern int ParentProcessId(int processId);
+
+        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void MakeSnapshot();
     }
 }

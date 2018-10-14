@@ -17,6 +17,8 @@ namespace ProcessTree.Models
         public static ICollection<ProcessModel> GetProcesses()
         {
             var allProcesses = Process.GetProcesses();
+            NativeMethods.MakeSnapshot();
+
             ICollection<ProcessModel> savedProcesses = new Collection<ProcessModel>();
             ICollection<Process> subProcesses = new Collection<Process>();
             bool isNotSubPocess = true;
@@ -26,7 +28,7 @@ namespace ProcessTree.Models
                 isNotSubPocess = true;
                 foreach (var process in allProcesses)
                 {
-                    int paretntId = NativeMethods.ParentProcessId(currentProcess);
+                    int paretntId = NativeMethods.ParentProcessId(currentProcess.Id);
                     if (process.Id == paretntId)
                     {
                         isNotSubPocess = false;
@@ -56,7 +58,7 @@ namespace ProcessTree.Models
         {
             foreach(var subprocess in subprocesses)
             {
-                if (NativeMethods.ParentProcessId(subprocess) == curentProcess.Id)
+                if (NativeMethods.ParentProcessId(subprocess.Id) == curentProcess.Id)
                 {
                     curentProcess.AddSubprocess(new ProcessModel(subprocess));
                 }

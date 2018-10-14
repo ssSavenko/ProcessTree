@@ -21,9 +21,11 @@ namespace ProcessTree.ViewModels
         public MainViewModel() 
         {
             processes = ProcessesReader.GetProcesses();
-           
+        
         }
 
         public ICollection<ProcessModel> Processes => processes;
+
+        public ICommand RefreshData => refreshTreeView;
     }
 }
