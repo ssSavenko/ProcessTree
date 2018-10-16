@@ -27,5 +27,10 @@ namespace ProcessTree.Views
 
             DataContext = new MainViewModel();
         }
+
+        private void TreeView_Selected(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

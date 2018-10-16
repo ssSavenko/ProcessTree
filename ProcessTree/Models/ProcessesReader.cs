@@ -16,37 +16,38 @@ namespace ProcessTree.Models
 
         public static ICollection<ProcessModel> GetProcesses()
         {
-            var allProcesses = Process.GetProcesses();
+            var Processes = Process.GetProcesses();
             NativeMethods.MakeSnapshot();
 
+            ICollection<ProcessModel> allProcesses = new Collection<ProcessModel>();
             ICollection<ProcessModel> savedProcesses = new Collection<ProcessModel>();
-            ICollection<Process> subProcesses = new Collection<Process>();
-            bool isNotSubPocess = true;
+            ICollection<ProcessModel> subProcesses = new Collection<ProcessModel>();
+            bool isSubProcess;
+
+            foreach (var process in Processes)
+            {
+                allProcesses.Add(new ProcessModel(process, NativeMethods.ParentProcessId(process.Id)));
+            }
 
             foreach (var currentProcess in allProcesses)
             {
-                isNotSubPocess = true;
+                isSubProcess = false;
                 foreach (var process in allProcesses)
                 {
-                    int paretntId = NativeMethods.ParentProcessId(currentProcess.Id);
-                    if (process.Id == paretntId)
+                    if (currentProcess.BaseProcess == process.Id)
                     {
-                        isNotSubPocess = false;
+                        subProcesses.Add(currentProcess);
+                        isSubProcess = true;
                         break;
                     }
                 }
-
-                if(!isNotSubPocess)
+                if (!isSubProcess)
                 {
-                    subProcesses.Add(currentProcess);
-                }
-                else
-                {
-                    savedProcesses.Add(new ProcessModel(currentProcess));
+                    savedProcesses.Add(currentProcess);
                 }
             }
-
-            foreach(var process in savedProcesses)
+            
+            foreach (var process in savedProcesses)
             {
                 SaveAllSubProcesses(process, subProcesses);
             }
@@ -54,17 +55,17 @@ namespace ProcessTree.Models
             return savedProcesses;
         }
 
-        private static void SaveAllSubProcesses(ProcessModel curentProcess, ICollection<Process> subprocesses)
+        private static void SaveAllSubProcesses(ProcessModel curentProcess, ICollection<ProcessModel> subprocesses)
         {
-            foreach(var subprocess in subprocesses)
+            foreach (var subprocess in subprocesses)
             {
-                if (NativeMethods.ParentProcessId(subprocess.Id) == curentProcess.Id)
+                if (curentProcess.Id == subprocess.BaseProcess)
                 {
-                    curentProcess.AddSubprocess(new ProcessModel(subprocess));
+                    curentProcess.AddSubprocess(subprocess);
                 }
             }
-            
-            foreach(var subprocess in curentProcess.SubProcesses)
+
+            foreach (var subprocess in curentProcess.SubProcesses)
             {
                 SaveAllSubProcesses(subprocess, subprocesses);
             }

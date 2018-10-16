@@ -13,7 +13,7 @@
             <RowDefinition/>
             <RowDefinition Height="33"/>
         </Grid.RowDefinitions>
-        <TreeView Margin="5" Grid.Row="0" ItemsSource="{Binding Processes}">
+        <TreeView Margin="5" Grid.Row="0" ItemsSource="{Binding Processes}" SelectedValuePath="{Binding Path = SelectedProcess, Mode=TwoWay}">
             <TreeView.Resources>
                 <HierarchicalDataTemplate DataType="{x:Type local:ProcessModel}" ItemsSource="{Binding Path=SubProcesses}">
                     <Grid>
@@ -41,8 +41,8 @@
                 <ColumnDefinition Width="75"/>
                 <ColumnDefinition Width="75"/>
             </Grid.ColumnDefinitions>
-            <TextBox Margin = "5" Grid.Column="0"/>
-            <Button  Margin = "5" Grid.Column="1" Content="Start"   Command="{Binding StartPrpcess}"/>
+            <TextBox Margin = "5" Grid.Column="0" Text="{Binding ProcessName}"/>
+            <Button  Margin = "5" Grid.Column="1" Content="Start"   Command="{Binding StartProcess}"/>
             <Button  Margin = "5" Grid.Column="2" Content="Stop"    Command="{Binding StopProcess}"/>
             <Button  Margin = "5" Grid.Column="3" Content="Refresh" Command="{Binding RefreshData}"/>
         </Grid>

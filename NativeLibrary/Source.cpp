@@ -22,11 +22,11 @@ extern "C"
 					returnID = entry.th32ParentProcessID;
 					break;
 				}
-			}while (Process32Next(snapshot, &entry));
+			} while (Process32Next(snapshot, &entry));
 		}
 
 		return returnID;
- 	}
+	}
 
 	__declspec(dllexport) void MakeSnapshot()
 	{

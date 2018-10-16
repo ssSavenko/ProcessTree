@@ -10,20 +10,20 @@ namespace ProcessTree.Models
 {
     public class ProcessModel
     {
-        private int baseProcess;
+        private int baseProcessId;
         private int id;
         private string name;
         private ICollection<ProcessModel> subprocesses;
 
-        public ProcessModel(Process process)
+        public ProcessModel(Process process, int parentId)
         {
             name = process.ProcessName;
             id = process.Id;
-            baseProcess = process.BasePriority;
+            baseProcessId = parentId;
             subprocesses = new List<ProcessModel>();
         }
 
-        public int BaseProcess => baseProcess;
+        public int BaseProcess => baseProcessId;
 
         public int Id => id;
 
