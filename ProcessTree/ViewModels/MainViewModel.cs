@@ -1,26 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Windows.Input;
-using System.Text;
-using System.Threading.Tasks;
 using System.Diagnostics;
 using Utilities.Commands;
 using Utilities.ViewModels;
 using ProcessTree.Models;
 using System.ComponentModel;
-using System.Windows;
 
 namespace ProcessTree.ViewModels
 {
     public class MainViewModel : ViewModel
     {
         private ICommand closeProcess;
-        private string textBoxText;
         private ICollection<ProcessModel> processes;
+        private string processName = "";
         private ICommand refreshTreeView;
+        private ProcessModel selectedProcess;
         private ICommand startProcess;
-        private string selectedProcess = "";
 
         public MainViewModel()
         {
@@ -31,36 +26,56 @@ namespace ProcessTree.ViewModels
             closeProcess = new DelegateCommand(CloseProcess);
         }
 
-        public string ProcessName
+        public bool IsStartButtonEnable
         {
-            get { return textBoxText; }
-            set { textBoxText = value; }
+            get => ProcessName != "";
+        }
+
+        public bool IsStopButtonEnable
+        {
+            get => selectedProcess != null;
         }
 
         public ICollection<ProcessModel> Processes => processes;
 
-        public string SelectedProcess
+        public string ProcessName
+        {
+            get { return processName; }
+            set
+            {
+                processName = value;
+                OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsStartButtonEnable)));
+            }
+        }
+
+        public ICommand RefreshData => refreshTreeView;
+
+        public ProcessModel SelectedProcess
         {
             get { return selectedProcess; }
-            set { selectedProcess = value; }
+            set
+            {
+                selectedProcess = value;
+                OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsStopButtonEnable)));
+            }
         }
 
         public ICommand StartProcess => startProcess;
 
         public ICommand StopProcess => closeProcess;
 
-        public ICommand RefreshData => refreshTreeView;
-        
         public void CloseProcess()
         {
-
+            Process.GetProcessById(selectedProcess.Id).Kill();
+            selectedProcess = null;
+            OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsStopButtonEnable)));
         }
 
         public void OpenProcess()
         {
             try
             {
-                Process.Start(textBoxText, null);
+                Process.Start(processName, null);
             }
             catch (Win32Exception e) { }
         }

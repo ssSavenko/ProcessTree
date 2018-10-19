@@ -6,6 +6,12 @@ extern "C"
 {
 	static HANDLE snapshot;
 
+	__declspec(dllexport) void MakeSnapshot()
+	{
+		snapshot = nullptr;
+		snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+	}
+
 	__declspec(dllexport) int ParentProcessId(int processId)
 	{
 		int returnID = 0;
@@ -26,11 +32,5 @@ extern "C"
 		}
 
 		return returnID;
-	}
-
-	__declspec(dllexport) void MakeSnapshot()
-	{
-		snapshot = nullptr;
-		snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
 	}
 }

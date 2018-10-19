@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ProcessTree.Models"
+        xmlns:localModels ="clr-namespace:ProcessTree.Models"
+        xmlns:localViews ="clr-namespace:ProcessTree.Views"
+        Icon = "..\Resources\Icon.ico"
         mc:Ignorable="d"
         Title="Processes" 
         Height="450" Width="800" 
@@ -13,9 +15,9 @@
             <RowDefinition/>
             <RowDefinition Height="33"/>
         </Grid.RowDefinitions>
-        <TreeView Margin="5" Grid.Row="0" ItemsSource="{Binding Processes}" SelectedValuePath="{Binding Path = SelectedProcess, Mode=TwoWay}">
-            <TreeView.Resources>
-                <HierarchicalDataTemplate DataType="{x:Type local:ProcessModel}" ItemsSource="{Binding Path=SubProcesses}">
+        <localViews:BindableTreeView Margin="5" Grid.Row="0" ItemsSource="{Binding Processes}" BindableSelectedItem="{Binding Path = SelectedProcess, Mode=TwoWay}">
+            <localViews:BindableTreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type localModels:ProcessModel}" ItemsSource="{Binding Path=SubProcesses}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
@@ -32,8 +34,8 @@
                         <TextBlock Grid.Column="5" Text="{Binding BaseProcess}"/>
                     </Grid>
                 </HierarchicalDataTemplate>
-            </TreeView.Resources>
-        </TreeView>
+            </localViews:BindableTreeView.Resources>
+        </localViews:BindableTreeView>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -41,9 +43,9 @@
                 <ColumnDefinition Width="75"/>
                 <ColumnDefinition Width="75"/>
             </Grid.ColumnDefinitions>
-            <TextBox Margin = "5" Grid.Column="0" Text="{Binding ProcessName}"/>
-            <Button  Margin = "5" Grid.Column="1" Content="Start"   Command="{Binding StartProcess}"/>
-            <Button  Margin = "5" Grid.Column="2" Content="Stop"    Command="{Binding StopProcess}"/>
+            <TextBox Margin = "5" Grid.Column="0" Text="{Binding Path = ProcessName, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button  Margin = "5" Grid.Column="1" Content="Start"   Command="{Binding StartProcess}" IsEnabled="{Binding IsStartButtonEnable}"/>
+            <Button  Margin = "5" Grid.Column="2" Content="Stop"    Command="{Binding StopProcess}" IsEnabled="{Binding IsStopButtonEnable}"/>
             <Button  Margin = "5" Grid.Column="3" Content="Refresh" Command="{Binding RefreshData}"/>
         </Grid>
     </Grid>

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Diagnostics;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Management;
 
 namespace ProcessTree.Models
 {
@@ -32,6 +27,12 @@ namespace ProcessTree.Models
             foreach (var currentProcess in allProcesses)
             {
                 isSubProcess = false;
+
+                if (currentProcess.Id == currentProcess.BaseProcess)
+                {
+                    savedProcesses.Add(currentProcess);
+                    continue;
+                }
                 foreach (var process in allProcesses)
                 {
                     if (currentProcess.BaseProcess == process.Id)
