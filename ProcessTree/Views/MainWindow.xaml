@@ -24,14 +24,10 @@
                             <ColumnDefinition Width="5"/>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
-                            <ColumnDefinition Width="5"/>
-                            <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" FontWeight="Bold" Text="{Binding Name}"/>
                         <TextBlock Grid.Column="2">(</TextBlock>
                         <TextBlock Grid.Column="3" Text="{Binding Id}"/>
-                        <TextBlock Grid.Column="4">)</TextBlock>
-                        <TextBlock Grid.Column="5" Text="{Binding BaseProcess}"/>
                     </Grid>
                 </HierarchicalDataTemplate>
             </localViews:BindableTreeView.Resources>
