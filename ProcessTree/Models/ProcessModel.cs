@@ -8,14 +8,13 @@ namespace ProcessTree.Models
         private readonly int baseProcessId;
         private readonly int id;
         private readonly string name;
-        private readonly ICollection<ProcessModel> subprocesses;
+        private readonly ICollection<ProcessModel> subprocesses = new List<ProcessModel>();
 
         public ProcessModel(Process process, int parentId)
         {
             name = process.ProcessName;
             id = process.Id;
             baseProcessId = parentId;
-            subprocesses = new List<ProcessModel>();
         }
 
         public int BaseProcess => baseProcessId;
