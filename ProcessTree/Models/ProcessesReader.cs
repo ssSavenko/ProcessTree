@@ -63,7 +63,7 @@ namespace ProcessTree.Models
                 }
             }
 
-            foreach (var subprocess in curentProcess.SubProcesses)
+            foreach (var subprocess in curentProcess.Subprocesses)
             {
                 SaveAllSubProcesses(subprocess, subprocesses);
             }

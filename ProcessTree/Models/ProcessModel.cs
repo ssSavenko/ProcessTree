@@ -23,7 +23,7 @@ namespace ProcessTree.Models
 
         public string Name => name;
 
-        public IEnumerable<ProcessModel> SubProcesses => subprocesses;
+        public IEnumerable<ProcessModel> Subprocesses => subprocesses;
 
         public bool DeleteSubProcessById(int processID)
         {
