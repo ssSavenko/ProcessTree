@@ -46,8 +46,12 @@ namespace ProcessTree.ViewModels
             get { return processName; }
             set
             {
-                processName = value;
-                OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsStartButtonEnable)));
+                if (value != null && value != processName)
+                {
+                    processName = value;
+                    
+                    OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsStartButtonEnable)));
+                }
             }
         }
 
@@ -58,8 +62,11 @@ namespace ProcessTree.ViewModels
             get { return selectedProcess; }
             set
             {
-                selectedProcess = value;
-                OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsStopButtonEnable)));
+                if (value != null && selectedProcess != value)
+                {
+                    selectedProcess = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsStopButtonEnable)));
+                }
             }
         }
 
