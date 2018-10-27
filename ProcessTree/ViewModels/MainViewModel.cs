@@ -10,6 +10,7 @@ namespace ProcessTree.ViewModels
 {
     public class MainViewModel : ViewModel
     {
+        private readonly ProcessesReader processesReader;
         private ICommand closeProcess;
         private ICollection<ProcessModel> processes;
         private string processName = "";
@@ -19,7 +20,8 @@ namespace ProcessTree.ViewModels
 
         public MainViewModel()
         {
-            processes = ProcessesReader.GetProcesses();
+            processesReader = new ProcessesReader();
+            processes = processesReader.GetProcesses();
 
             refreshTreeView = new DelegateCommand(RefreshTreeView);
             startProcess = new DelegateCommand(OpenProcess);
@@ -82,7 +84,7 @@ namespace ProcessTree.ViewModels
 
         public void RefreshTreeView()
         {
-            processes = ProcessesReader.GetProcesses();
+            processes = processesReader.GetProcesses();
             OnPropertyChanged(new PropertyChangedEventArgs(nameof(Processes)));
         }
     }

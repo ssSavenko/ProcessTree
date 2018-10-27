@@ -6,10 +6,7 @@ namespace ProcessTree.Models
 {
     internal class ProcessesReader
     {
-        private ProcessesReader()
-        { }
-
-        public static ICollection<ProcessModel> GetProcesses()
+        public ICollection<ProcessModel> GetProcesses()
         {
             var Processes = Process.GetProcesses();
             NativeMethods.MakeSnapshot();
@@ -56,7 +53,7 @@ namespace ProcessTree.Models
             return savedProcesses;
         }
 
-        private static void SaveAllSubProcesses(ProcessModel curentProcess, ICollection<ProcessModel> subprocesses)
+        private void SaveAllSubProcesses(ProcessModel curentProcess, ICollection<ProcessModel> subprocesses)
         {
             foreach (var subprocess in subprocesses)
             {
