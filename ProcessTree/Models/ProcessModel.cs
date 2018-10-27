@@ -26,6 +26,29 @@ namespace ProcessTree.Models
 
         public IEnumerable<ProcessModel> SubProcesses => subprocesses;
 
+        public bool DeleteSubProcessById(int processID)
+        {
+            bool isProcessDeleted = false;
+
+            foreach(var subprocess in subprocesses)
+            {
+                if(subprocess.Id == processID)
+                {
+                    subprocesses.Remove(subprocess);
+                    isProcessDeleted = true;
+                }
+                else
+                {
+                    isProcessDeleted = subprocess.DeleteSubProcessById(processID);
+                    if (isProcessDeleted)
+                    {
+                        break;
+                    }
+                }
+            }
+            return isProcessDeleted;
+        }
+
         public void AddSubprocess(ProcessModel process)
         {
             subprocesses.Add(process);

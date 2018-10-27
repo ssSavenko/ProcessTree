@@ -67,8 +67,8 @@ namespace ProcessTree.ViewModels
         public void CloseProcess()
         {
             Process.GetProcessById(selectedProcess.Id).Kill();
-            selectedProcess = null;
-            OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsStopButtonEnable)));
+            SelectedProcess = null;
+            RefreshData.Execute(null);
         }
 
         public void OpenProcess()
