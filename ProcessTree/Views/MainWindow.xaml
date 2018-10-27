@@ -42,8 +42,8 @@
                 <ColumnDefinition Width="75"/>
             </Grid.ColumnDefinitions>
             <TextBox Margin = "5" Grid.Column="0" Text="{Binding Path = ProcessName, UpdateSourceTrigger=PropertyChanged}"/>
-            <Button  Margin = "5" Grid.Column="1" Content="Start"   Command="{Binding StartProcess}" IsEnabled="{Binding IsStartButtonEnable}"/>
-            <Button  Margin = "5" Grid.Column="2" Content="Stop"    Command="{Binding StopProcess}" IsEnabled="{Binding IsStopButtonEnable}"/>
+            <Button  Margin = "5" Grid.Column="1" Content="Start"   Command="{Binding StartProcess}" IsEnabled="{Binding StartProcessEnable}"/>
+            <Button  Margin = "5" Grid.Column="2" Content="Stop"    Command="{Binding StopProcess}" IsEnabled="{Binding StopProcessEnable}"/>
             <Button  Margin = "5" Grid.Column="3" Content="Refresh" Command="{Binding RefreshData}"/>
         </Grid>
     </Grid>

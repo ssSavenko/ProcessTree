@@ -29,12 +29,12 @@ namespace ProcessTree.ViewModels
             closeProcess = new DelegateCommand(CloseProcess);
         }
 
-        public bool IsStartButtonEnable
+        public bool StartProcessEnable
         {
             get => ProcessName != "";
         }
 
-        public bool IsStopButtonEnable
+        public bool StopProcessEnable
         {
             get => selectedProcess != null;
         }
@@ -50,7 +50,7 @@ namespace ProcessTree.ViewModels
                 {
                     processName = value;
                     
-                    OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsStartButtonEnable)));
+                    OnPropertyChanged(new PropertyChangedEventArgs(nameof(StartProcessEnable)));
                 }
             }
         }
@@ -65,7 +65,7 @@ namespace ProcessTree.ViewModels
                 if (value != null && selectedProcess != value)
                 {
                     selectedProcess = value;
-                    OnPropertyChanged(new PropertyChangedEventArgs(nameof(IsStopButtonEnable)));
+                    OnPropertyChanged(new PropertyChangedEventArgs(nameof(StopProcessEnable)));
                 }
             }
         }
