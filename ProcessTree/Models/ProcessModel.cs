@@ -5,10 +5,10 @@ namespace ProcessTree.Models
 {
     public class ProcessModel
     {
-        private int baseProcessId;
-        private int id;
-        private string name;
-        private ICollection<ProcessModel> subprocesses;
+        private readonly int baseProcessId;
+        private readonly int id;
+        private readonly string name;
+        private readonly ICollection<ProcessModel> subprocesses;
 
         public ProcessModel(Process process, int parentId)
         {

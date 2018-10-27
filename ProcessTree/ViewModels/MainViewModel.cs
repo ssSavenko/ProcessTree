@@ -10,13 +10,14 @@ namespace ProcessTree.ViewModels
 {
     public class MainViewModel : ViewModel
     {
+        private readonly ICommand closeProcess;
         private readonly ProcessesReader processesReader;
-        private ICommand closeProcess;
+        private readonly ICommand refreshTreeView;
+        private readonly ICommand startProcess;
+
         private ICollection<ProcessModel> processes;
         private string processName = "";
-        private ICommand refreshTreeView;
         private ProcessModel selectedProcess;
-        private ICommand startProcess;
 
         public MainViewModel()
         {
