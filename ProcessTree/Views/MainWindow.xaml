@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         <localViews:BindableTreeView Margin="5" Grid.Row="0" ItemsSource="{Binding Processes}" BindableSelectedItem="{Binding Path = SelectedProcess, Mode=TwoWay}">
             <localViews:BindableTreeView.Resources>
-                <HierarchicalDataTemplate DataType="{x:Type localModels:ProcessModel}" ItemsSource="{Binding Path=SubProcesses}">
+                <HierarchicalDataTemplate DataType="{x:Type localModels:ProcessModel}" ItemsSource="{Binding Path=Subprocesses}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
