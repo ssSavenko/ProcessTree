@@ -11,7 +11,7 @@ namespace ProcessTree.ViewModels
     public class MainViewModel : ViewModel
     {
         private readonly ICommand closeProcess;
-        private readonly ProcessesReader processesReader;
+        private readonly ProcessesReader processesReader = new ProcessesReader();
         private readonly ICommand refreshTreeView;
         private readonly ICommand startProcess;
 
@@ -21,7 +21,6 @@ namespace ProcessTree.ViewModels
 
         public MainViewModel()
         {
-            processesReader = new ProcessesReader();
             processes = processesReader.GetProcesses();
 
             refreshTreeView = new DelegateCommand(RefreshTreeView);
